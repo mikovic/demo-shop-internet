@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
     // https://getbootstrap.com/docs/4.1/getting-started/introduction/csrf
 
-    @RequestMapping("/shop")
+    @RequestMapping("/")
     public String showHomePage() {
         return "index";
     }
