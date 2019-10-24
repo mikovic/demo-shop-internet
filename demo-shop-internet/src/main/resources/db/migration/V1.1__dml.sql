@@ -2,7 +2,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO roles (name)
 VALUES
-('ROLE_EMPLOYEE'),('ROLE_MANAGER'),('ROLE_ADMIN');
+('ROLE_USER'),('ROLE_ADMIN');
 
 INSERT INTO users (username,password,first_name,last_name,email)
 VALUES
@@ -12,8 +12,7 @@ VALUES
 INSERT INTO users_roles (user_id, role_id)
 VALUES
 (1, 1),
-(1, 2),
-(1, 3);
+(1, 2);
 
 INSERT INTO `courses`
 (`title`) VALUES

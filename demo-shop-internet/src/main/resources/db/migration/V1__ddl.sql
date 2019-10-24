@@ -38,6 +38,7 @@ CREATE TABLE users_roles (
   REFERENCES roles (id)
   ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS students;
 
 CREATE TABLE students (
@@ -77,8 +78,53 @@ DROP TABLE IF EXISTS products;
 CREATE TABLE products (
 	id int(11) NOT NULL AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
+    description VARCHAR(250) NOT NULL,
     price DECIMAL(8,2) NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS categories;
+CREATE TABLE categories (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    title VARCHAR(50) NOT NULL,
+    photo BLOB NULL ,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS images;
+CREATE TABLE images (
+	id int(11) NOT NULL AUTO_INCREMENT,
+    title VARCHAR(50),
+    photo BLOB NULL ,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS products_categories;
+
+CREATE TABLE products_categories (
+  product_id int(11) NOT NULL,
+  category_id int(11) NOT NULL,
+
+  CONSTRAINT  FOREIGN KEY (product_id )
+  REFERENCES products (id)
+  ON DELETE NO ACTION ON UPDATE NO ACTION,
+
+  CONSTRAINT FOREIGN KEY (category_id)
+  REFERENCES categories (id)
+  ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS products_categories;
+
+CREATE TABLE products_images (
+  product_id int(11) NOT NULL,
+  image_id int(11) NOT NULL,
+
+  CONSTRAINT  FOREIGN KEY (product_id )
+  REFERENCES products (id)
+  ON DELETE NO ACTION ON UPDATE NO ACTION,
+
+  CONSTRAINT FOREIGN KEY (image_id)
+  REFERENCES images (id)
+  ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

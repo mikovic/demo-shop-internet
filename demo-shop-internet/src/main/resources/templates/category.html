@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Sign In</title>
+    <title>Home 01</title>
     <div th:replace="~{head.html}" />
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -15,41 +15,37 @@
 <div class="site-wrap">
 
     <header>
-        <div th:replace="~{header :: navi(Home)}" />
+        <div th:replace="~{header :: navi(ADMIN)}" />
+
+
     </header>
     <div class="site-section">
         <div class="container">
             <div class="row">
-                <form class="form-signin"  th:action="@{/authenticateTheUser}"  method="post">
+                <form class="form-signin" th:action="@{/categories/create}"
+                      th:object="${category}" method="post" enctype="multipart/form-data" >
                     <div class="text-center mb-4">
-                        <h2 class="h3 mb-3 font-weight-normal">Sign In</h2>
-                    </div>
-                    <div>
-                        <div th:if="${param.error} != null">
-                            <div class="alert alert-danger col-xs-offset-1 col-xs-10">
-                                Invalid username and password.
-                            </div>
-                        </div>
-                        <div th:if="${param.logout} != null">
-                            <div class="alert alert-success col-xs-offset-1 col-xs-10">
-                                You have been logged out.
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-label-group">
-                        <input id="userName" name="username"   class="form-control" placeholder="Your Name" required>
-                        <label for="userName">Your Name</label>
+                        <h2 class="h3 mb-3 font-weight-normal">Product</h2>
                     </div>
                     <div class="form-label-group">
-                        <input type="password" id="inputPassword" name="password"  class="form-control" placeholder="Password" required>
-                        <label for="inputPassword">Password</label>
+                        <div class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
+                        <input type="text" id="inputTitle" th:field="*{title}"  class="form-control" placeholder="Title" required autofocus>
+                        <label for="inputTitle">Title</label>
                     </div>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-                    <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+
+                    <div class="form-label-group">
+                        <input  th:field="*{photo}" type="file" class="form-control" multiple accept="image/*,image/jpeg">
+                    </div>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Add Category</button>
 
                 </form>
+
+
+
+
 
             </div>
         </div>
@@ -69,6 +65,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/jquery.stellar.min.js}"></script>
 <script th:src="@{/js/jquery.countdown.min.js}"></script>
@@ -85,5 +82,3 @@
 </body>
 
 </html>
-
-

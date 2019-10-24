@@ -7,8 +7,11 @@ import com.mikovic.demoshopinternet.entities.User;
 import com.mikovic.demoshopinternet.repositories.RoleRepository;
 import com.mikovic.demoshopinternet.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -49,16 +52,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void save(SystemUser systemUser) {
+
 		User user = new User();
 		user.setUserName(systemUser.getUserName());
 		user.setPassword(passwordEncoder.encode(systemUser.getPassword()));
 		user.setFirstName(systemUser.getFirstName());
 		user.setLastName(systemUser.getLastName());
 		user.setEmail(systemUser.getEmail());
-
-		user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_EMPLOYEE")));
+		user.setRoles(Arrays.asList(roleRepository.findOneByName("ROLE_USER")));
 
 		userRepository.save(user);
+
+
+	}
+
+	@Override
+	public void addToSecurityContext (SystemUser systemUser) {
+		UserDetails userInfo =loadUserByUsername(systemUser.getUserName());
+		Authentication auth = new
+				UsernamePasswordAuthenticationToken(userInfo, userInfo.getPassword(), userInfo.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
 	}
 
 	@Override

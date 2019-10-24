@@ -53,17 +53,15 @@
 
 
     <div class="site-navbar py-2 js-sticky-header site-navbar-target d-none pl-0 d-lg-block" role="banner">
-
         <div class="container">
             <div class="d-flex align-items-center">
-
                 <div class="mr-auto">
                     <nav class="site-navigation position-relative text-right" role="navigation">
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none pl-0 d-lg-block">
                             <li class="active"  >
-                                <a href="index.html" class="nav-link text-left"
-                                   th:classappend="${activeTab == 'Home' ? 'left-topbar-item-active' : ''}"
-                                >(current)</a>
+                                <a th:href="@{/}" class="nav-link text-left"
+                                   th:classappend="${activeTab == 'Home' ? 'left-topbar-item-active' : ''}">Home</a>
+
                             </li>
                             <li>
                                 <a href="categories.html" class="nav-link text-left">Categories</a>
@@ -74,22 +72,35 @@
                             <li>
                                 <a href="categories.html" class="nav-link text-left">Business</a>
                             </li>
-                            <li>
-                                <a href="categories.html" class="nav-link text-left">Health</a>
-                            </li>
+
                             <li><a href="categories.html" class="nav-link text-left">Design</a></li>
-                            <li>
-                                <a href="categories.html" class="nav-link text-left">Sign In</a>
+
+                                <li sec:authorize="isAnonymous()">
+                                    <a th:href="@{/login}" class="nav-link text-left">Sign In</a>
+                                </li>
+                                <li sec:authorize="isAnonymous()">
+                                    <a th:href="@{/register/showRegistrationForm}" class="nav-link text-left">Sign Up</a></li>
+                                <li sec:authorize="isAuthenticated()">
+                                    <a th:href="@{/logout}" class="nav-link text-left">Logout</a>
+                                </li>
+                            <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')" >
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ADMIN
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" th:href="@{/categories/create}">Add Category</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item"th:href="@{/products/create}" >Add product</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </li>
-                            <li><a th:href="@{/register/showRegistrationForm}" class="nav-link text-left">Sign Up</a></li>
                         </ul>
                     </nav>
-
                 </div>
-
             </div>
         </div>
-
     </div>
-
 </div>
+</div>
+</html>

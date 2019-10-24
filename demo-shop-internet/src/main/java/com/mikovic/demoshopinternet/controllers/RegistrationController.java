@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,8 +44,8 @@ public class RegistrationController {
 
     // Binding Result после @ValidModel !!!
     @PostMapping("/processRegistrationForm")
-    public String processRegistrationForm(@Valid @ModelAttribute("systemUser") SystemUser theSystemUser, BindingResult theBindingResult, Model theModel) {
-        String userName = theSystemUser.getUserName();
+    public String processRegistrationForm(@Valid @ModelAttribute("systemUser") SystemUser systemUser, BindingResult theBindingResult, Model theModel) {
+        String userName =  systemUser.getUserName();
         logger.debug("Processing registration form for: " + userName);
         if (theBindingResult.hasErrors()) {
             return "registration-form";
@@ -51,13 +53,14 @@ public class RegistrationController {
         User existing = userService.findByUserName(userName);
         if (existing != null) {
             // theSystemUser.setUserName(null);
-            theModel.addAttribute("systemUser", theSystemUser);
+            theModel.addAttribute(" systemUser",  systemUser);
             theModel.addAttribute("registrationError", "User name already exists");
             logger.debug("User name already exists.");
             return "registration-form";
         }
-        userService.save(theSystemUser);
+        userService.save( systemUser);
         logger.debug("Successfully created user: " + userName);
-        return "registration-confirmation";
+        userService.addToSecurityContext( systemUser);
+        return "redirect:/";
     }
 }
