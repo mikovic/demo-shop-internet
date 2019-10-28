@@ -22,30 +22,58 @@
     <div class="site-section">
         <div class="container">
             <div class="row">
-
-                <form class="form-signin">
+                <form class="form-signin" th:action="@{/register/processRegistrationForm}"
+                      th:object="${systemUser}" method="post"  >
                     <div class="text-center mb-4">
 
-                        <h2 class="h3 mb-3 font-weight-normal">Sign In</h2>
-
+                        <h2 class="h3 mb-3 font-weight-normal">Sign Up</h2>
+                    </div>
                     <div class="form-label-group">
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                        <input type="email" id="inputEmail" th:field="*{email}"  class="form-control" placeholder="Email address" required autofocus>
                         <label for="inputEmail">Email address</label>
                     </div>
-
+                    <div class="error" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" />
                     <div class="form-label-group">
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <input id="userName" th:field="*{userName}"  class="form-control" placeholder="Your Name" required>
+                        <label for="userName">Your Name</label>
+                    </div>
+
+                    <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" />
+                    <div class="form-label-group">
+                        <input id="firstName" th:field="*{firstName}"  class="form-control" placeholder="First Name" required>
+                        <label for="firstName">First Name</label>
+                    </div>
+
+                    <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" />
+                    <div class="form-label-group">
+                        <input id="lastName" th:field="*{lastName}"  class="form-control" placeholder="Last Name" required>
+                        <label for="lastName">Last Name</label>
+                    </div>
+
+
+                    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" th:field="*{password}"  class="form-control" placeholder="Password" required>
                         <label for="inputPassword">Password</label>
                     </div>
 
+                    <div class="error" th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" />
+                    <div class="form-label-group">
+                        <input type="password" id="matchingPassword" th:field="*{matchingPassword}"  class="form-control" placeholder="Confirm password" required>
+                        <label for="matchingPassword">Confirm password</label>
+                    </div>
                     <div class="checkbox mb-3">
                         <label>
                             <input type="checkbox" value="remember-me"> Remember me
                         </label>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
                     <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+
                 </form>
+
+
+
 
 
             </div>
@@ -59,10 +87,14 @@
 <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15"/></svg></div>
 
 <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-<script th:src="@{js/jquery-migrate-3.0.1.min.js}"></script>
-<script th:src="@{/js/jquery-ui.js}"></script>
+<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+<script th:src="@{js/jquery-ui.js}"></script>
 <script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
 <script th:src="@{/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/jquery.stellar.min.js}"></script>
 <script th:src="@{/js/jquery.countdown.min.js}"></script>
@@ -73,6 +105,8 @@
 <script th:src="@{/js/jquery.sticky.js}"></script>
 <script th:src="@{/js/jquery.mb.YTPlayer.min.js}"></script>
 <script th:src="@{/js/main.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
 
 </body>
 

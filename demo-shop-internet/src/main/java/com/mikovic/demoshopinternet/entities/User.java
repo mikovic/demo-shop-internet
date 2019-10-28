@@ -1,18 +1,24 @@
 package com.mikovic.demoshopinternet.entities;
 
+import com.mikovic.demoshopinternet.validation.FieldMatch;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
 @Data
 @Table(name = "users")
+
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+
 
 	@Column(name = "username")
 	private String userName;
@@ -20,11 +26,14 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
+
 	@Column(name = "first_name")
 	private String firstName;
 
+	@NotNull(message = "is required")
 	@Column(name = "last_name")
 	private String lastName;
+
 
 	@Column(name = "email")
 	private String email;
@@ -112,10 +121,16 @@ public class User {
 	}
 
 	public Collection<Role> getRoles() {
+		if(roles == null){
+			this.roles = new ArrayList<>();
+		}
 		return roles;
 	}
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+	public void addRole(Role role){
+		getRoles().add(role);
 	}
 }

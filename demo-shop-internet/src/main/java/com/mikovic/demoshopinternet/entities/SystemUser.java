@@ -6,7 +6,9 @@ import com.mikovic.demoshopinternet.validation.ValidEmail;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -18,11 +20,12 @@ public class SystemUser {
     private String userName;
 
     @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @Size(min = 3, message = "is required")
+//    @Pattern(regexp = "^[0-9]{3}", message = "only 5 letters/digits")
     private String password;
 
     @NotNull(message = "is required")
-    @Size(min = 1, message = "is required")
+    @Size(min = 3, message = "is required")
     private String matchingPassword;
 
     @NotNull(message = "is required")
@@ -37,6 +40,9 @@ public class SystemUser {
     @NotNull(message = "is required")
     @Size(min = 1, message = "is required")
     private String email;
+
+
+    private String role;
 
     public String getUserName() {
         return userName;
@@ -86,7 +92,16 @@ public class SystemUser {
         this.email = email;
     }
 
-    //    @NotNull
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+//    @NotNull
 //    @Min(value = 0, message = "value must be greater or equals than 0")
 //    @Max(value = 10, message = "value must be lesser or equals than 10")
 //    private Integer count;
