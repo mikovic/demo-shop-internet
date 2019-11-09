@@ -18,9 +18,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
 
     Product findOneByTitle(String title);
 
-
-    @Query(value = "SELECT DISTINCT product FROM Product product left join fetch product.category category left join fetch product.images images WHERE product.category.id =:id",
-            countQuery = "select count(product) FROM Product product left join product.category category left join product.images images WHERE product.category.id =:id")
+    @Query(value = "SELECT DISTINCT product FROM Product product WHERE product.category.id =:id")
     public Page<Product> findAllByCategoryId (Pageable pageable,@Param("id") Long id);
 
 }
