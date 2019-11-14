@@ -22,11 +22,11 @@
     <div class="site-section">
         <div class="container">
             <div class="row">
-                <form class="form-signin" th:action="@{/categories/create}"
-                      th:object="${category}" method="post" enctype="multipart/form-data" >
+                <form class="form-signin" th:action="@{/subcategories/create}"
+                      th:object="${subcategory}" method="post" enctype="multipart/form-data" >
                     <div class="text-center mb-4">
 
-                        <h2 class="h3 mb-3 font-weight-normal">Choose category</h2>
+                        <h2 class="h3 mb-3 font-weight-normal">Choose Subcategory</h2>
                     </div>
                     <div class="form-label-group">
                         <div class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
@@ -39,12 +39,19 @@
                         <label for="description">Description</label>
                     </div>
 
+                    <select id="sub" th:field="*{category}">
+                        <option th:each="category : ${categories}"
+                                th:value="${{category}}"
+                                th:text="${category.title}">
+
+                        </option>
+                    </select>
 
                     <div class="form-label-group">
                         <input  name="file" type="file" class="form-control" accept="image/*,image/jpeg">
                     </div>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Add Category</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Add Subcategory</button>
 
                 </form>
 

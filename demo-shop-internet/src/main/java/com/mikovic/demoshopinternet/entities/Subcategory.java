@@ -4,14 +4,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "subcategories")
+@Data
 @NoArgsConstructor
-public class Category {
+@ToString
+public class Subcategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,28 +26,23 @@ public class Category {
     @Column(name = "description")
     @Size(min = 5, max = 250, message = "требуется минимум 5 символов")
     private String description;
-
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "categories_subcategories",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "subcategory_id")
-    )
-    private List<Subcategory> subcategories;
-
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-            name = "categories_products",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
+    //mappedBy на другой стороне будет subcategory
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subcategory")
     @ToString.Exclude
     private List<Product> products;
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinTable(
-            name = "categories_images",
-            joinColumns = @JoinColumn(name = "category_id"),
+            name = "categories_subcategories",
+            joinColumns = @JoinColumn(name = "subcategory_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+     private Category category;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(
+            name = "subcategories_images",
+            joinColumns = @JoinColumn(name = "subcategory_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id")
     )
 
@@ -56,22 +54,6 @@ public class Category {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     public String getTitle() {
@@ -90,11 +72,27 @@ public class Category {
         this.description = description;
     }
 
-    public List<Subcategory> getSubcategories() {
-        return subcategories;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setSubcategories(List<Subcategory> subcategories) {
-        this.subcategories = subcategories;
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

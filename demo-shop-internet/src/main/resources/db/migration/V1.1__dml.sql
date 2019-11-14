@@ -14,10 +14,16 @@ VALUES
 (1, 1),
 (1, 2);
 
-INSERT INTO `courses`
-(`title`) VALUES
-('Математика'),
-('Физика'),
-('История'),
-('Английский'),
-('Химия');
+INSERT INTO brands (title)
+VALUES
+('NON NAME'),
+('SAMSUNG'),
+('PHILIPS'),
+('SONY'),
+('APLE'),
+('BOSH'),
+('VITEK'),
+('Александр Дюма'),
+('Лев Толстой'),
+('Виктор Гюго');
+

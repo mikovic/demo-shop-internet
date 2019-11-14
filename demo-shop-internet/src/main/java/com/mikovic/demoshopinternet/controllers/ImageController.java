@@ -23,16 +23,5 @@ public class ImageController {
     ImageService imageService;
     final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
-    @RequestMapping(value = "/{id}/photo", method = RequestMethod.GET)
-    @ResponseBody
-    public byte[] downloadImage(@PathVariable("id") Long id) {
 
-        Image image = imageService.findById(id);
-
-        if (image.getPhoto() != null) {
-            logger.info("Downloading image for id: {} with size: {}", image.getPhoto(), image.getPhoto().length);
-        }
-
-        return image.getPhoto();
-    }
 }

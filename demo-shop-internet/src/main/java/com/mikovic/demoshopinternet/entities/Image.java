@@ -18,8 +18,8 @@ public class Image {
     private Long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "photo")
-    private byte[] photo;
+    @Column(name = "path")
+    private String path;
 
     @ManyToOne
     @JoinTable(
@@ -29,6 +29,23 @@ public class Image {
     )
     @Cascade({org.hibernate.annotations.CascadeType.DELETE, org.hibernate.annotations.CascadeType.DETACH})
     private Product product;
+    @OneToOne(mappedBy = "image")
+    @JoinTable(
+            name = "categories_images",
+            joinColumns = @JoinColumn(name = "image_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE, org.hibernate.annotations.CascadeType.DETACH})
+    private Category category;
+
+    @OneToOne(mappedBy = "image")
+    @JoinTable(
+            name = "subcategories_images",
+            joinColumns = @JoinColumn(name = "image_id"),
+            inverseJoinColumns = @JoinColumn(name = "subcategory_id")
+    )
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE, org.hibernate.annotations.CascadeType.DETACH})
+    private Subcategory subcategory;
 
     public Long getId() {
         return id;
@@ -46,12 +63,12 @@ public class Image {
         this.title = title;
     }
 
-    public byte[] getPhoto() {
-        return photo;
+    public String getPath() {
+        return path;
     }
 
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public Product getProduct() {
