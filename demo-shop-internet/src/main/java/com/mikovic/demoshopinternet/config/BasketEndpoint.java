@@ -1,5 +1,6 @@
 package com.mikovic.demoshopinternet.config;
 
+
 import com.mikovic.demoshopinternet.gener.GetBasketRequest;
 import com.mikovic.demoshopinternet.gener.GetBasketResponse;
 import org.springframework.beans.factory.annotation.Autowired;
