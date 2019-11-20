@@ -50,10 +50,12 @@ public class SubcategoryController {
 
 
     @RequestMapping(path = "/{categoryId}", method = RequestMethod.GET)
-    public String showSubcategoriesListByCategoryId(@PathVariable(value = "categoryId") Long categoryId, Model model) {
+    public String showSubcategoriesListByCategoryId(@PathVariable(value = "categoryId") Long categoryId, Model model,
+                                                    @RequestParam(value = "subcat", required = false) String subcat ) {
         List<Subcategory> subcategories = subcategoryService.getSubcategoryListByCategoryId(categoryId);
         model.addAttribute("subcategories",subcategories );
         model.addAttribute("categories", categoryService.findAll());
+        if(subcat!=null) return "subcategories-page";
         return "subcategories";
     }
 

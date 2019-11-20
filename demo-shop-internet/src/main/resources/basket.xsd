@@ -1,0 +1,32 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.mikovic.com/demoshopinternet/gener"
+           targetNamespace="http://www.mikovic.com/demoshopinternet/gener"
+           elementFormDefault="qualified">
+
+    <xs:element name="getBasketRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="orderId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getBasketResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="basket" type="tns:basket"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="basket">
+        <xs:sequence>
+            <xs:element name="titles" type="xs:string"/>
+            <xs:element name="price" type="xs:string"/>
+            <xs:element name="date" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+</xs:schema>

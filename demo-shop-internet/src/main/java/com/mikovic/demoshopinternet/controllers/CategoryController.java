@@ -54,7 +54,7 @@ public class CategoryController {
     // Binding Result после @ValidModel !!!
     @PostMapping("/create")
     public String processCreateCategory(@Valid @ModelAttribute("category") Category category,
-                                        BindingResult bindingResult, Model uiModel,
+                                        BindingResult bindingResult, Model model,
                                         HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes,
                                         @RequestParam(value="file", required=false) MultipartFile file
     ) {
@@ -64,7 +64,7 @@ public class CategoryController {
 
             return "category";
         }
-        uiModel.asMap().clear();
+        model.asMap().clear();
 
         // Process upload file
         if (file != null) {
@@ -74,6 +74,7 @@ public class CategoryController {
             category.setImage(image);
             categoryService.save(category);
         }
+        model.addAttribute("categories", categoryService.findAll());
         return "redirect:/categories/create";
     }
 

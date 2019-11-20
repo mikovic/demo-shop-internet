@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home 01</title>
+    <div th:replace="~{head.html}" />
+
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.3.1/css/all.css}"/>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <header>
+        <div th:replace="~{header :: navi(Home)}" />
+    </header>
+
+
+    <div class="site-section">
+        <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="section-title">
+                            <span class="caption d-block small">Categories</span>
+                            <h2>Politics</h2>
+                        </div>
+                        <div class="post-entry-2 d-flex" th:each="product:${products}">
+
+                                <img th:src="@{'/images/' + ${product.images.get(0).path}}" class="thumbnail order-md-2">
+
+                            <div class="contents order-md-1 pl-0">
+                                <h2><a href="blog-single.html"><span th:text="${product.title}"></span></a></h2>
+                                <p class="mb-3"><span th:text="${product.description}"></span></p>
+                                <p class="mb-3"><span th:text="${product.price}"></span></p>
+                                <div class="post-meta">
+                                    <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+
+                                </div>
+                                <div class="contents">
+                                    <a class="btn btn-primary" th:href="@{'/shop/cart/add/' + ${product.id}}" role="button"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+
+                        </div>
+                     </div>
+                    <div class="col-lg-3">
+                        <div class="section-title">
+                            <h2>Popular Posts</h2>
+                        </div>
+                        <div class="trend-entry d-flex"th:each="subcategory, state:${subcategories}">
+                            <div class="number align-self-start"><span  th:if="${state.index &lt; 9}">0</span><span th:text="${state.index+1}"></span></div>
+                            <div class="trend-contents">
+                                <h2><a href="blog-single.html"><span th:text="${subcategory.title}"></span></a></h2>
+                                <div class="post-meta">
+                                    <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                                    <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="custom-pagination list-unstyled">
+                            <li th:each="i : ${#numbers.sequence(1, totalPage, 1)}">
+                                <a th:class="page-link" th:text="${i}" th:classappend="${page == i ? 'active' : ''}" th:href="@{'/shop/' + ${subcategoryId} +'/?page=' + ${i} + ${filters}}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="footer">
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- .site-wrap -->
+
+
+<!-- loader -->
+<div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15"/></svg></div>
+
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+<script th:src="@{js/jquery-ui.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.stellar.min.js}"></script>
+<script th:src="@{/js/jquery.countdown.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+<script th:src="@{/js/aos.js}"></script>
+<script th:src="@{/js/jquery.fancybox.min.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/jquery.mb.YTPlayer.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

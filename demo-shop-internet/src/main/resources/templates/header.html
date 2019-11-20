@@ -63,9 +63,21 @@
                                    th:classappend="${activeTab == 'Home' ? 'left-topbar-item-active' : ''}">Home</a>
 
                             </li>
-                            <li>
-                                <a href="categories.html" class="nav-link text-left">Categories</a>
+
+                            <li class="nav-item dropdown" >
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <th:block th:each="category : ${categories}">
+                                        <a  class="nav-link text-left" th:href="@{'/subcategories/' + ${category.id}+'/?subcat=true'}" th:style="'text:inline'"><span th:text="${category.title}"></span></a>
+
+                                    </th:block>
+
+
+                                </div>
                             </li>
+
+
                             <li>
                                 <a href="categories.html" class="nav-link text-left">Politics</a>
                             </li>
@@ -73,7 +85,7 @@
                                 <a href="categories.html" class="nav-link text-left">Business</a>
                             </li>
 
-                            <li><a href="categories.html" class="nav-link text-left">Design</a></li>
+                            <li><a th:href="@{/cart}" class="nav-link text-left">Ваша корзина</a></li>
 
                                 <li sec:authorize="isAnonymous()">
                                     <a th:href="@{/login}" class="nav-link text-left">Sign In</a>

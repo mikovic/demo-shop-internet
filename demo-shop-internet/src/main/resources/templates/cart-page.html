@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Home 01</title>
+    <div th:replace="~{head.html}" />
+
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.3.1/css/all.css}"/>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <header>
+        <div th:replace="~{header :: navi(Home)}" />
+    </header>
+    <div class="site-section">
+        <div class="container">
+        <h1>Корзина</h1>
+
+        <div th:if="${cart.getItems().size() > 0}" >
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th>№</th>
+                    <th>Название товара</th>
+                    <th>Цена за ед.</th>
+                    <th>Кол-во</th>
+                    <th>Сумма</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cartItem, itrStat : ${cart.getItems()}">
+                    <td th:text="${itrStat.index + 1}"/>
+                    <td th:text="${cartItem.product.title}"/>
+                    <td th:text="${cartItem.itemPrice}"/>
+                    <td th:text="${cartItem.quantity}"/>
+                    <td th:text="${cartItem.totalPrice}"/>
+                </tr>
+                <tr>
+                    <td/><td/><td/>
+                    <td>Итого заказ:</td>
+                    <td th:text="${cart.totalCost}"/>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+
+            <a sec:authorize="isAuthenticated()" type="button" class="btn btn-primary" th:href="@{/shop/order/fill}">Продолжить оформление заказа</a>
+            <a sec:authorize="isAnonymous()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#authWarningModal">Продолжить оформление заказа</a>
+
+        </div>
+        <div th:unless="${cart.getItems().size() > 0}" >
+            <span>Ваша корзина пуста</span>
+        </div>
+    </div>
+
+
+<div class="modal fade" id="authWarningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Предупреждение</h5>
+            </div>
+            <div class="modal-body">
+                <span>Для формирования заказа Вам необходимо зайти в свою учетную запись</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Хорошо</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+</div>
+<!-- .site-wrap -->
+
+
+<!-- loader -->
+<div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15"/></svg></div>
+
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+<script th:src="@{js/jquery-ui.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.stellar.min.js}"></script>
+<script th:src="@{/js/jquery.countdown.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+<script th:src="@{/js/aos.js}"></script>
+<script th:src="@{/js/jquery.fancybox.min.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/jquery.mb.YTPlayer.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>
