@@ -5,11 +5,12 @@ import com.mikovic.demoshopinternet.entities.OrderItem;
 import com.mikovic.demoshopinternet.entities.Product;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
     private List<OrderItem> items;
     private Double totalCost;
 

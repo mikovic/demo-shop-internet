@@ -5,12 +5,13 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "images")
 @Data
 @NoArgsConstructor
-public class Image {
+public class Image implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

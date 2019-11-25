@@ -1,7 +1,9 @@
 package com.mikovic.demoshopinternet.controllers;
 
+import com.mikovic.demoshopinternet.bus.RabbitmqDemoApplication;
 import com.mikovic.demoshopinternet.services.CategoryService;
 import com.mikovic.demoshopinternet.services.SubcategoryService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ public class MainController {
     CategoryService categoryService;
     @Autowired
     SubcategoryService subcategoryService;
+
     @RequestMapping("/")
     public String showHomePage(Model model) {
         model.addAttribute("categories", categoryService.findAll());

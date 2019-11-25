@@ -6,12 +6,13 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "categories")
 @NoArgsConstructor
-public class Category {
+public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

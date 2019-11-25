@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,7 +14,7 @@ import java.util.Collection;
 @Data
 @Table(name = "users")
 
-public class User {
+public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
