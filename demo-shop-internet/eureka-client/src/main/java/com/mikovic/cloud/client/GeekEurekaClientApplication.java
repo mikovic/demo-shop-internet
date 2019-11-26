@@ -1,14 +1,12 @@
-package com.mikovic.demoshopinternet;
+package main.java.com.mikovic.cloud.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableFeignClients
-public class DemoShopInternetApplication {
-
+public class GeekEurekaClientApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(DemoShopInternetApplication.class, args);
+		SpringApplication.run(GeekEurekaClientApplication.class, args);
 	}
-
 }
+
