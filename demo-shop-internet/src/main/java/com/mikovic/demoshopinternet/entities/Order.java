@@ -5,13 +5,14 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Data
-public class Order {
+
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -153,4 +154,8 @@ public class Order {
         this.confirmed = confirmed;
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
 }

@@ -1,5 +1,6 @@
 package com.mikovic.demoshopinternet.controllers;
 
+import com.mikovic.demoshopinternet.bus.RabbitmqDemoApplication;
 import com.mikovic.demoshopinternet.entities.DeliveryAddress;
 import com.mikovic.demoshopinternet.entities.Order;
 import com.mikovic.demoshopinternet.entities.Product;
@@ -7,9 +8,13 @@ import com.mikovic.demoshopinternet.entities.User;
 import com.mikovic.demoshopinternet.repositories.specifications.ProductSpecs;
 import com.mikovic.demoshopinternet.services.*;
 import com.mikovic.demoshopinternet.utils.Message;
+import com.mikovic.demoshopinternet.utils.ShoppingCart;
+import org.aspectj.weaver.ast.Or;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +46,12 @@ private ProductService productService;
     private ShoppingCartService shoppingCartService;
     @Autowired
     private DeliveryAddressService deliverAddressService;
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
 
     @RequestMapping(path = "/{subcategoryId}", method = RequestMethod.GET)
@@ -88,6 +99,8 @@ private ProductService productService;
     @GetMapping("/cart/add/{id}")
     public String addProductToCart(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
         shoppingCartService.addToCart(httpServletRequest.getSession(), id);
+        ShoppingCart cart = shoppingCartService.getCurrentCart(httpServletRequest.getSession());
+        rabbitTemplate.convertAndSend(RabbitmqDemoApplication.directExchangeName,"Direct Process", cart);
         String referrer = httpServletRequest.getHeader("referer");
         return "redirect:" + referrer;
     }
@@ -123,9 +136,12 @@ private ProductService productService;
         order.setPhoneNumber(orderFromFrontend.getPhoneNumber());
         order.setDeliveryDate(LocalDateTime.now().plusDays(7));
         order.setDeliveryPrice(0.0);
-        order = orderService.saveOrder(order);
-        model.addAttribute("order", order);
-        return "redirect:/shop/order/"+order.getId();
+        rabbitTemplate.convertAndSend(RabbitmqDemoApplication.topicExchangeName,"order", order);
+
+        long id = (long) rabbitTemplate.receiveAndConvert("spring-boot-topic-queue2");
+        Order orderFrom = orderService.findById(id);
+        model.addAttribute("order", orderFrom );
+        return "redirect:/shop/order/"+orderFrom.getId();
     }
     @GetMapping("/order/{id}")
     public String orderPay(Model model, @PathVariable(name = "id") Long id, Principal principal){
