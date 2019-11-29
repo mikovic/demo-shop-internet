@@ -4,12 +4,19 @@ package com.mikovic.demoshopinternet.utils;
 import com.mikovic.demoshopinternet.entities.OrderItem;
 import com.mikovic.demoshopinternet.entities.Product;
 import lombok.Data;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Component
+//У каждого пользователя, будет своя корзина, которая живет в своей сессии
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCart implements Serializable {
     private List<OrderItem> items;
     private Double totalCost;
