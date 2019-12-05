@@ -36,7 +36,7 @@ public class Product  implements Serializable {
     @Column(name = "title")
     private String title;
 //сущность brand уже существует и ее не надо запоминать
-    @OneToOne(cascade = CascadeType.DETACH)
+    @OneToOne(cascade = CascadeType.DETACH, fetch  = FetchType.EAGER)
     @JoinColumn(name="brand_id", referencedColumnName = "id")
     private Brand brand;
 
@@ -75,6 +75,15 @@ public class Product  implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "image_id")
     )
     private List<Image> images;
+
+
+
+    public Product(Long id, @NotNull(message = "Title not null") @Size(min = 4, message = "Title legth min 4 sym") String title, @NotNull(message = "Description not null") @Size(min = 4, message = "Description legth min 4 sym") String description, @NotNull(message = "price not null") @Min(value = 1, message = "Min 1") double price) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+    }
 
     public void addImage(Image image){
         if(images ==null){

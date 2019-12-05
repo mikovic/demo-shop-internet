@@ -55,8 +55,10 @@ public class SubcategoryController {
         List<Subcategory> subcategories = subcategoryService.getSubcategoryListByCategoryId(categoryId);
         model.addAttribute("subcategories",subcategories );
         model.addAttribute("categories", categoryService.findAll());
-        if(subcat!=null) return "subcategories-page";
-        return "subcategories";
+        if(subcat!=null){
+            return "subcategories-page";
+        }
+        return "subcategories-list";
     }
 
     @GetMapping("/create")

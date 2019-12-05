@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "subcategories")
 @Data
 @NoArgsConstructor
-@ToString
+//@ToString
 public class Subcategory implements Serializable {
 
     @Id

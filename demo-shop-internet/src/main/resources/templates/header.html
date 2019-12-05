@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-lg-6 d-flex">
-                <a href="index.html" class="site-logo">
+                <a th:href="@{/}" class="site-logo">
                     Meranda
                 </a>
 
@@ -69,7 +69,7 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <th:block th:each="category : ${categories}">
-                                        <a  class="nav-link text-left" th:href="@{'/subcategories/' + ${category.id}+'/?subcat=true'}" th:style="'text:inline'"><span th:text="${category.title}"></span></a>
+                                        <a  class="nav-link text-left" th:href="@{'/subcategories/' + ${category.id}+'/?subcat=1'}" th:style="'text:inline'"><span th:text="${category.title}"></span></a>
 
                                     </th:block>
 
@@ -79,10 +79,10 @@
 
 
                             <li>
-                                <a href="categories.html" class="nav-link text-left">Politics</a>
+                                <a th:href="@{/categories/list}" class="nav-link text-left">Politics</a>
                             </li>
                             <li>
-                                <a href="categories.html" class="nav-link text-left">Business</a>
+                                <a th:href="@{/categories/list}" class="nav-link text-left">Business</a>
                             </li>
 
                             <li><a th:href="@{/cart}" class="nav-link text-left">Ваша корзина</a></li>

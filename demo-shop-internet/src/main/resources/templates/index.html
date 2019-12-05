@@ -63,8 +63,8 @@
           <div class="row">
             <div class="col-md-6" >
               <div class="post-entry-1" th:each="category:${categories}">
-                <a href="post-single.html"><img th:src="@{'/images/' + ${category.image.path}}" alt="Image" class="img-fluid"></a>
-                <h2><a href="blog-single.html"><span th:text="${category.title}"></span></a></h2>
+                <a href=""><img th:src="@{'/images/' + ${category.image.path}}" alt="Image" class="img-fluid"></a>
+                <h2><a th:href="@{'/subcategories/' + ${category.id}+'/?subcat=true'}"><span th:text="${category.title}"></span></a></h2>
                 <p th:text="${category.description}"></p>
 
                 <div class="post-meta">
@@ -77,7 +77,7 @@
               <div class="post-entry-2 d-flex bg-light" th:each="subcategory:${subcategories}"  >
                 <img class="thumbnail" th:src="@{'/images/' + ${subcategory.image.path}}"></img>
                 <div class="contents">
-                  <h2><a href="blog-single.html"><span th:text="${subcategory.title}"></span></a></h2>
+                  <h2><a th:href="@{'/shop/' + ${subcategory.id} +'/?page=1'}"><span th:text="${subcategory.title}"></span></a></h2>
                   <div class="post-meta">
                     <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
                     <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>

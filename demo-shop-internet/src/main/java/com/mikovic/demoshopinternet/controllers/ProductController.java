@@ -42,7 +42,7 @@ public class ProductController {
 
     @RequestMapping("/list")
     @Transactional
-    public String showStudentsList(Model model) {
+    public String showProductsList(Model model) {
         List<Product> allProduct = productService.getAllProducts();
         model.addAttribute("productsList", allProduct);
         return "products-list";
