@@ -96,6 +96,15 @@ private ProductService productService;
         model.addAttribute("word", word);
         return "shop-page";
     }
+    @GetMapping("/product/{id}")
+    public String showProduct(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("product", product);
+        return "product-page";
+    }
+
+
     @GetMapping("/cart/add/{id}")
     public String addProductToCart(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
         shoppingCartService.addToCart(httpServletRequest.getSession(), id);

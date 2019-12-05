@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home 01</title>
+    <div th:replace="~{head.html}" />
+
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.3.1/css/all.css}"/>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+<div class="site-wrap">
+
+    <header>
+        <div th:replace="~{header :: navi(Home)}" />
+    </header>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 single-content">
+
+                    <p class="mb-5">
+                        <img th:src="@{'/images/' + ${product.images.get(0).path}}" alt="Image" class="img-fluid">
+                    </p>
+                    <h1 class="mb-4">
+                        <span th:text="${product.title}"></span>
+                    </h1>
+                    <div class="post-meta d-flex mb-5">
+                        <div class="bio-pic mr-3">
+                            <a class="btn btn-primary" th:href="@{'/shop/cart/add/' + ${product.id}}" role="button"><i class="fas fa-shopping-cart"></i></a>
+
+                        </div>
+                        <div class="vcard">
+                            <h3><span th:text="${product.price}"></span></h3>
+                        </div>
+                    </div>
+
+                    <p><span th:text="${product.description}"></p>
+                    <p>Voluptatum animi, voluptate sint aperiam facere a nam, ex reiciendis eum nemo ipsum nobis, rem illum cupiditate at quaerat amet qui recusandae hic, atque laboriosam perspiciatis? Esse quidem minima, voluptas necessitatibus, officia culpa quo nulla, cupiditate iste vel unde magni.</p>
+
+                    <p>Dolores debitis excepturi maxime earum sapiente totam, quos dolore inventore tempore illum. Dolores explicabo sed amet aut atque, facere aliquid repudiandae quod possimus quo hic similique et voluptates fugit iure dolore quam ipsa numquam assumenda corporis? Dignissimos expedita fugit sapiente.</p>
+
+
+                    <div class="pt-5">
+                        <p>Categories:  <a href="#">Design</a>, <a href="#">Events</a>  Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
+                    </div>
+
+
+                    <div class="pt-5">
+                        <div class="section-title">
+                            <h2 class="mb-5">6 Comments</h2>
+                        </div>
+                        <ul class="comment-list">
+                            <li class="comment">
+                                <div class="vcard bio">
+                                    <img src="images/person_1.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>Jean Doe</h3>
+                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                    <p><a href="#" class="reply">Reply</a></p>
+                                </div>
+                            </li>
+
+                            <li class="comment">
+                                <div class="vcard bio">
+                                    <img src="images/person_1.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>Jean Doe</h3>
+                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                    <p><a href="#" class="reply">Reply</a></p>
+                                </div>
+
+                                <ul class="children">
+                                    <li class="comment">
+                                        <div class="vcard bio">
+                                            <img src="images/person_1.jpg" alt="Image placeholder">
+                                        </div>
+                                        <div class="comment-body">
+                                            <h3>Jean Doe</h3>
+                                            <div class="meta">January 9, 2018 at 2:21pm</div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                            <p><a href="#" class="reply">Reply</a></p>
+                                        </div>
+
+
+                                        <ul class="children">
+                                            <li class="comment">
+                                                <div class="vcard bio">
+                                                    <img src="images/person_1.jpg" alt="Image placeholder">
+                                                </div>
+                                                <div class="comment-body">
+                                                    <h3>Jean Doe</h3>
+                                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                                    <p><a href="#" class="reply">Reply</a></p>
+                                                </div>
+
+                                                <ul class="children">
+                                                    <li class="comment">
+                                                        <div class="vcard bio">
+                                                            <img src="images/person_1.jpg" alt="Image placeholder">
+                                                        </div>
+                                                        <div class="comment-body">
+                                                            <h3>Jean Doe</h3>
+                                                            <div class="meta">January 9, 2018 at 2:21pm</div>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                                            <p><a href="#" class="reply">Reply</a></p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="comment">
+                                <div class="vcard bio">
+                                    <img src="images/person_1.jpg" alt="Image placeholder">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>Jean Doe</h3>
+                                    <div class="meta">January 9, 2018 at 2:21pm</div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                    <p><a href="#" class="reply">Reply</a></p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- END comment-list -->
+
+                        <div class="comment-form-wrap pt-5">
+                            <div class="section-title">
+                                <h2 class="mb-5">Leave a comment</h2>
+                            </div>
+                            <form action="#" class="p-5 bg-light">
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="website">Website</label>
+                                    <input type="url" class="form-control" id="website">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Post Comment" class="btn btn-primary py-3">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 ml-auto">
+                    <div class="section-title">
+                        <h2>Popular Posts</h2>
+                    </div>
+
+
+                    <div class="trend-entry d-flex"  th:each="category, state:${categories}">
+                        <div class="number align-self-start"><span  th:if="${state.index &lt; 9}">0</span><span th:text="${state.index+1}"></span></div>
+
+                        <div class="trend-contents">
+                            <h2><a th:href="@{'/subcategories/' + ${category.id}+'/?subcat=true'}"><span th:text="${category.title}"></span></a></h2>
+                            <div class="post-meta">
+                                <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                                <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <p>
+                        <a href="#" class="more">See All Popular <span class="icon-keyboard_arrow_right"></span></a>
+                    </p>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="site-section subscribe bg-light">
+        <div class="container">
+            <form action="#" class="row align-items-center">
+                <div class="col-md-5 mr-auto">
+                    <h2>Newsletter Subcribe</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis aspernatur ut at quae omnis pariatur obcaecati possimus nisi ea iste!</p>
+                </div>
+                <div class="col-md-6 ml-auto">
+                    <div class="d-flex">
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                        <button type="submit" class="btn btn-secondary" ><span class="icon-paper-plane"></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- END section -->
+
+
+
+
+
+
+
+
+    <div class="footer">
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="copyright">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- .site-wrap -->
+
+
+<!-- loader -->
+<div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15"/></svg></div>
+
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.3.1/dist/jquery.min.js}"></script>
+<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+<script th:src="@{js/jquery-ui.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.stellar.min.js}"></script>
+<script th:src="@{/js/jquery.countdown.min.js}"></script>
+<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+<script th:src="@{/js/aos.js}"></script>
+<script th:src="@{/js/jquery.fancybox.min.js}"></script>
+<script th:src="@{/js/jquery.sticky.js}"></script>
+<script th:src="@{/js/jquery.mb.YTPlayer.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

@@ -35,12 +35,13 @@ public class CategoryController {
     @Autowired
     SubcategoryService subcategoryService;
 
-    @RequestMapping("/list")
-    @Transactional
+    @GetMapping("/list")
     public String showCategoriesList(Model model) {
-        List<Category> allCategories = categoryService.getCategoryList();
-        model.addAttribute("categoryList",allCategories );
+        List<Category> categories = categoryService.getCategoryList();
+        model.addAttribute("categories",categories );
+        model.addAttribute("subcategories",subcategoryService.findall() );
         return "categories-list";
+
     }
 
     @GetMapping("/create")

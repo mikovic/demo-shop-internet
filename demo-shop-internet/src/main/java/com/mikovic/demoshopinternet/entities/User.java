@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Data
+//@Data
 @Table(name = "users")
 
 public class User implements Serializable {

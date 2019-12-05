@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "images")
-@Data
+//@Data
 @NoArgsConstructor
 public class Image implements Serializable {
 
